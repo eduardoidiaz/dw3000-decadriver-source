@@ -21,4 +21,5 @@ endif()
 idf_component_register(SRCS ${srcs}
                        PRIV_INCLUDE_DIRS priv
                        INCLUDE_DIRS ${incl}
-                       REQUIRES driver)
+                       REQUIRES driver
+                       PRIV_REQUIRES esp_driver_gpio esp_driver_spi)

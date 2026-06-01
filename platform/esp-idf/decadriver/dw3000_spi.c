@@ -5,6 +5,10 @@
 #include "dw3000_spi.h"
 #include "log.h"
 
+#include "esp_intr_alloc.h"  // Fixes: 'ESP_INTR_FLAG_LEVEL2' undeclared
+#include "freertos/portmacro.h" // Fixes: 'portMAX_DELAY' undeclared
+
+
 /* This file implements the SPI functions used by deca_port.c*/
 
 #define DW3000_SPI_HOST SPI2_HOST
@@ -25,7 +29,7 @@ void dw3000_spi_trace_in(bool rw, const uint8_t* headerBuffer,
 						 uint16_t bodyLength);
 #endif
 
-int dw3000_spi_init(void)
+dw3000_spi_init(void)
 {
 	esp_err_t ret;
 
@@ -53,6 +57,8 @@ int dw3000_spi_init(void)
 	dw_cfg.spics_io_num = CONFIG_DW3000_SPI_CS;
 	return spi_bus_add_device(DW3000_SPI_HOST, &dw_cfg, &dw_spi);
 }
+
+
 
 static int dw3000_spi_speed_set(int hz)
 {
