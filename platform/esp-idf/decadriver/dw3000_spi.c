@@ -29,7 +29,7 @@ void dw3000_spi_trace_in(bool rw, const uint8_t* headerBuffer,
 						 uint16_t bodyLength);
 #endif
 
-dw3000_spi_init(void)
+int dw3000_spi_init(void)
 {
 	esp_err_t ret;
 
